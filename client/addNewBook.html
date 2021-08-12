@@ -1,0 +1,124 @@
+<!-- /*CS415 project Fairfield City Library
+* @author Naha The Unborn One
+* @since 2021-08-05
+*/ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> Add New Books</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <br> <br>
+ <a href="aboutUs.html">  ==========-- About US --  </a> 
+ 
+ <a href="virtualTour.html">  -- Virtual Tour --</a>
+ 
+ <a href="books.html">   -- Books --   </a>
+ 
+ <a href="singIn.html"> -- Sign In --</a>
+ <br> <br>
+ <br> <br>
+ 
+ </nav>
+
+<h1> New Books Form</h1>
+<h4>Note: Form fields marked with asterisk(*) are required. </h4>
+
+
+
+
+<div style="padding-top:1em;" class="container">
+  <div style="padding-bottom:1em;">
+          <span style="font-size: 2em; color: #e4e732;">New Book Form</span>
+          <span id="alertMessageBox" style="display:none;float:none;margin-left:8em;" class="alert alert-dismissible alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Good Job! Book successfully added! Jai Guru Dev!</strong>
+          </span>
+  </div>
+  <div><span><b>Note:</b> All form fields marked with asterisk (*) are required.</span></div>
+  <br/>
+
+<form id="newBookForm">
+
+    <label for="title">*Book Title:</label>
+    <input type="text" id="title" name="title"><br><br>
+  
+    <label for="isbn">*ISNB:</label>
+    <input type="text" id="isbn" name="isbn"><br><br>
+
+
+    <label for="publisher">*Publisher:</label>
+    <input type="text" id="publisher" name="publisher"><br><br>
+
+
+    <label for="overdueFee">*Overdue Fee Perday:</label>
+    <input type="number" id="overdueFee" name="overdueFee" min="0.00" max="1000" value="0.00"><br><br>
+
+    <label for="datePublished">*Published Date:</label>
+    <input type="date" id="datePublished" name="publisheddate"><br><br>
+
+    <!-- <input type="reset" value="Reset">
+
+    <input type="submit" value="Save Book"> -->
+
+   <button id="btnReset" type="reset" class="btn btn-outline-warning">Reset</button>&nbsp;&nbsp;&nbsp;
+   <button id="btnSubmit" type="submit" class="btn btn-outline-success">Save Book</button>
+  
+  </form>
+    
+  <script>
+    const newBookForm = document.getElementById("newBookForm");
+    const txtIsbn = document.querySelector("#isbn");
+    const txtTitle = document.querySelector("#title");
+    const txtOverdueFee = document.querySelector("#overdueFee");
+    const txtPublisher = document.querySelector("#publisher");
+    const dtpkDatePublished = document.querySelector("#datePublished");
+    const alertMessageBox = document.getElementById("alertMessageBox");
+    newBookForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        //const formData = new FormData(this);
+        const isbn = txtIsbn.value;
+        const title = txtTitle.value;
+        const overdueFee = parseFloat(txtOverdueFee.value);
+        const publisher = txtPublisher.value;
+        const datePublished = dtpkDatePublished.value;
+        const newBookData = {
+            "ISBN": isbn,
+            "BookTitle": title,
+            "overdueFee": overdueFee,
+            "Publisher": publisher,
+            "DatePublished": datePublished
+        };
+        
+        fetch("http://localhost:4000/citylibrary/api/book/add", {
+            method: "post",
+            body: JSON.stringify(newBookData),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function(response) {
+            return response.json();
+        }).then(function (jsonResponseData) {
+            console.log(jsonResponseData);   
+            txtIsbn.value = "";     
+            txtTitle.value = "";   
+            txtOverdueFee.value = "0.00";
+            txtPublisher.value = "";
+            dtpkDatePublished.value = "";   
+            txtTitle.focus();
+            alertMessageBox.style.display = "inline-block";
+        }).catch(function(error) {
+            console.error(error);
+            alertMessageBox.classList.remove("alert-success");
+            alertMessageBox.classList.add("alert-danger");
+            alertMessageBox.style.display = "inline-block";
+        })
+    });
+</script>
+
+
+</body>
+</html>

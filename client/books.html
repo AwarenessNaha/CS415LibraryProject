@@ -1,0 +1,56 @@
+<!-- /*CS415 project Fairfield City Library
+* @author Naha The Unborn One
+* @since 2021-08-05
+*/ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Books</title>
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <nav>
+        <br> <br>
+     <a href="aboutUs.html">  ==========-- About US --  </a> 
+     
+     <a href="virtualTour.html">  -- Virtual Tour --</a>
+     
+     <a href="books.html">   -- Books --   </a>
+     
+     <a href="singIn.html"> -- Sign In --</a>
+     <br> <br>
+     <br> <br>
+     
+     </nav>
+
+<h1> Books in Our Collections</h1>
+<a class = "linkButton  " href="addNewBook.html">  Add New Book   </a> <br> <br><br>
+
+    
+    <div id="myDiv">
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th scope="col"> # </th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">Book Title</th>
+                    <th scope="col">overdue Fee</th>
+                    <th scope="col">Publisher</th>
+                    <th scope="col">Date Publishered</th>
+                    <th scope="col"> Update Book </th>
+                    <th scope="col"> Delete Book&nbsp;</th> 
+                    <td><a href="addNewBook.html>Edit</a></td>
+                <td><a data-toggle="modal" data-bookid="${book.bookId}" data-bookisbn="${book.isbn}" data-booktitle="${book.title}" href="#confirmDeleteBookModal">Delete</a></td>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+          
+    </div>
+    
+    <script src="./js/appui.js"></script>
+
+</body>
+</html>

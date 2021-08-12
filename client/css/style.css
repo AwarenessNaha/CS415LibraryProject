@@ -1,0 +1,14 @@
+/*
+style.css
+*/
+
+nav {
+    background-color: aquamarine;
+}
+
+a.linkButton{
+    border: 4px solid bisque;
+    padding: lem lem lem lem;
+    text-decoration: none;
+    border-radius: 5%;
+}
